@@ -154,6 +154,48 @@ Press `Ctrl + C` to stop following the logs.
 
 #### Manage OpenClaw Sessions
 
+
+### 7. Test Gemini API Connection
+
+Use the following command to test whether the Gemini API is accessible and can generate a response.
+
+```bash
+KEY="YOUR_GEMINI_API_KEY"; \
+curl -s -o /tmp/gemini_test.json -w "HTTP_STATUS=%{http_code}\n" \
+-H "Content-Type: application/json" \
+-X POST \
+"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$KEY" \
+-d '{"contents":[{"parts":[{"text":"Say hello"}]}]}'; \
+cat /tmp/gemini_test.json
+```
+
+**Purpose:**
+- Sends a test prompt (`Say hello`) to the Gemini API.
+- Uses `curl` to send a POST request.
+- Displays the HTTP response status code.
+- Saves the API response to `/tmp/gemini_test.json`.
+- Prints the JSON response for inspection.
+
+**Expected result:** An HTTP `200` status indicates that the request succeeded. The response JSON should contain the generated text.
+
+**Requirements:**
+- A valid Gemini API key.
+- Access to the specified Gemini model.
+- Internet connectivity and an available API quota.
+
+**Troubleshooting:**
+
+| Status code | Possible cause |
+|---|---|
+| `200` | Request succeeded |
+| `400` | Invalid request or parameters |
+| `401` / `403` | Authentication or permission issue |
+| `404` | Model or endpoint not found |
+| `429` | Rate limit or quota exceeded |
+
+**Security note:** Replace `YOUR_GEMINI_API_KEY` with your actual API key when running the command. Never commit real API keys to GitHub. The model name shown in this example must also be supported by your Gemini API access.
+
+
 List the available OpenClaw sessions:
 
 ```bash

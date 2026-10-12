@@ -76,7 +76,10 @@ uvicorn backend.main:app --host 0.0.0.0 --port 8081 --reload
 - Ensure OpenClaw is installed and configured before running its commands.
 
 Note: The command source .venv/bin/activate is suitable for Linux/macOS or WSL. If you run the backend directly in Windows PowerShell, use:
-    ***  .\.venv\Scripts\Activate.ps1
+
+```bash
+.\.venv\Scripts\Activate.ps1
+```
 
 
 ### 5. Gemini API & Google Model Configuration
